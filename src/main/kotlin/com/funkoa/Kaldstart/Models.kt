@@ -1,5 +1,5 @@
 package com.funkoa.Kaldstart.models
 
-data class KaldstartModel(
+data class Thing(
     val name: String
 )
