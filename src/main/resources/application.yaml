@@ -6,6 +6,21 @@ server:
 spring:
   main.banner-mode: off
   autoconfigure.exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/kaldstart-postgres
+    username: postgres
+    password: test
+
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: "org.hibernate.dialect.PostgreSQL95Dialect"
+        temp:
+          use_jdbc_metadata_defaults: false
+    hibernate:
+      ddl-auto: none
+
 
 
 EN_TEST_VARIABLE: kommerfraapplicationyaml
