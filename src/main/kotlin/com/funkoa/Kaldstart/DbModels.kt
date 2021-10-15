@@ -1,10 +1,12 @@
 package com.funkoa.Kaldstart
 
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Modifying
 import javax.persistence.*
 import java.io.Serializable
 import org.springframework.data.jpa.repository.Query
 import java.util.*
+import javax.transaction.Transactional
 
 @Entity(name = "DbThing")
 @Table( name = "DB_THING")
@@ -31,5 +33,7 @@ interface DbThingRepository: JpaRepository<DbThing, Long> {
     fun getDbThingByUuid(uuid: String): List<DbThing>
 
     @Query("DELETE FROM DbThing t WHERE t.uuid = :uuid")
-    fun deleteDbThingByUuid(uuid: String): List<DbThing>
+    @Modifying
+    @Transactional
+    fun deleteDbThingByUuid(uuid: String)
 }

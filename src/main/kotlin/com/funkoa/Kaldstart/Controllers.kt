@@ -25,9 +25,9 @@ class Controllers (
         return ResponseEntity.ok(dbThing.toThing())
     }
 
-    @DeleteMapping(produces = [MediaType.TEXT_PLAIN_VALUE])
-    fun deleteThingByUuid(@PathVariable uuid: String): ResponseEntity<List<Thing>> {
-        val listOfDeletedDbThings = thingRepository.deleteDbThingByUuid(uuid)
-        return ResponseEntity.ok(listOfDeletedDbThings.map { it.toThing() })
+    @DeleteMapping(path = ["{uuid}"], produces = [MediaType.TEXT_PLAIN_VALUE])
+    fun deleteThingByUuid(@PathVariable uuid: String): ResponseEntity<Unit> {
+        thingRepository.deleteDbThingByUuid(uuid)
+        return ResponseEntity.ok().build()
     }
 }
