@@ -37,3 +37,23 @@ interface DbThingRepository: JpaRepository<DbThing, Long> {
     @Transactional
     fun deleteDbThingByUuid(uuid: String)
 }
+
+
+@Entity(name = "PrivateNote")
+@Table( name = "PRIVATE_NOTE")
+data class PrivateNote (
+    @Id
+    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "private_note_sequence")
+    @SequenceGenerator(
+        name = "private_note_sequence_generator",
+        sequenceName = "private_note_sequence",
+        allocationSize = 50
+    )
+    val id: Long = 0,
+
+    @Column(name = "note", updatable = true, nullable = false)
+    val note: String
+
+): Serializable
+
+interface PrivateNoteRepository: JpaRepository<PrivateNote, Long>
