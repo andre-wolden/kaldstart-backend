@@ -75,6 +75,11 @@
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>sh.ory.kratos</groupId>
+			<artifactId>kratos-client</artifactId>
+			<version>0.8.0-alpha.2</version>
+		</dependency>
     </dependencies>
 
 	<build>

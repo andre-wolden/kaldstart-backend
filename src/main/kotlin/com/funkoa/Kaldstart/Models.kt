@@ -19,3 +19,7 @@ fun DbThing.toThing(): Thing = Thing(
     uuid = this.uuid,
     name = this.name
 )
+
+data class RestNewNote(
+    val note: String
+)

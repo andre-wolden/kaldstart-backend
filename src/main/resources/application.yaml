@@ -22,7 +22,3 @@ spring:
       ddl-auto: none
   flyway:
     enabled: true
-
-
-
-EN_TEST_VARIABLE: kommerfraapplicationyaml

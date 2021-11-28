@@ -1,16 +1,17 @@
 package com.funkoa.Kaldstart
 
-import com.funkoa.Kaldstart.models.NewThing
-import com.funkoa.Kaldstart.models.Thing
-import com.funkoa.Kaldstart.models.toDbThing
-import com.funkoa.Kaldstart.models.toThing
+import com.funkoa.Kaldstart.models.*
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import sh.ory.kratos.ApiClient
+import sh.ory.kratos.Configuration
+import sh.ory.kratos.api.V0alpha2Api
 
 @RestController
 @RequestMapping(path = ["/api"])
-class Controllers (
+@CrossOrigin(origins = ["http://127.0.0.1:3000", "http://localhost:3000"])
+class Controllers(
     val thingRepository: DbThingRepository,
     val privateNoteRepository: PrivateNoteRepository
 ) {
@@ -35,15 +36,34 @@ class Controllers (
     }
 
     // private notes
+
     @GetMapping(path = ["/private-notes/all"])
-    fun getPrivateNotes(): ResponseEntity<List<PrivateNote>>{
+    fun getPrivateNotes(): ResponseEntity<List<PrivateNote>> {
         return ResponseEntity.ok(privateNoteRepository.findAll().toList())
     }
 
     @PostMapping(path = ["/private-notes/new"])
-    fun newPrivateNoteEndpoint(@RequestBody note: String): ResponseEntity<PrivateNote> {
-        val privateNote = privateNoteRepository.saveAndFlush(PrivateNote(note = note))
+    fun newPrivateNoteEndpoint(@RequestBody restNewNote: RestNewNote): ResponseEntity<PrivateNote> {
+        val privateNote = privateNoteRepository.saveAndFlush(PrivateNote(note = restNewNote.note))
         return ResponseEntity.ok(privateNote)
+    }
+
+    @GetMapping(path = ["/user"])
+    fun getUserPage(){
+        val defaultClient: ApiClient = Configuration.getDefaultApiClient()
+
+        defaultClient.
+
+        val apiInstance = V0alpha2Api(defaultClient)
+        try {
+            apiInstance.getSelfServiceLoginFlow()
+
+
+        } catch (e: Exception) {
+            println(e.message)
+        }
+
+
     }
 
 }
